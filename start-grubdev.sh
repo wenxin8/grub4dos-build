@@ -3,10 +3,9 @@
 set -e
 
 #sudo apt-get -y update
-sudo apt install -y gcc-4.8 gcc-4.8-multilib nasm upx upx-ucl p7zip-full autoconf automake make patch binutils-dev liblzma-dev syslinux isolinux genisoimage
+#sudo apt install -y gcc-4.8 gcc-4.8-multilib nasm upx upx-ucl p7zip-full autoconf automake make patch binutils-dev liblzma-dev syslinux isolinux genisoimage
 
-#: << 'OLD_CODE'
-#1. 添加旧版源安装 GCC 4.8 (GCC 4.8 在 Ubuntu 22.04 官方源中已移除，需要从旧版本源安装)
+# 添加 Bionic 源（仅用于 GCC 4.8）
 echo "deb [trusted=yes] http://archive.ubuntu.com/ubuntu bionic main universe" | sudo tee /etc/apt/sources.list.d/bionic.list
 
 # 更新 apt
@@ -37,8 +36,7 @@ sudo apt install -y \
 
 # 设置 GCC 4.8 为默认
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 100
-sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/gcc-4.8 100
-
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 100
 
 # 验证 GCC
 gcc --version
@@ -49,15 +47,14 @@ gcc --version
 #fi
 
 # 移除 Bionic 源，避免影响 QEMU 安装
-sudo rm /etc/apt/sources.list.d/bionic.list
-sudo apt-get update
+#sudo rm /etc/apt/sources.list.d/bionic.list
+#sudo apt-get update
 
 # 从 Jammy 安装 QEMU
-sudo apt install -y qemu-kvm qemu-system-x86
+#sudo apt install -y qemu-kvm qemu-system-x86
 
 # 验证 QEMU
-qemu-system-x86_64 --version
-#OLD_CODE
+#qemu-system-x86_64 --version
 
 if [ ! "$INPUT_USEQEMU" = "1" ]; then
     exit
