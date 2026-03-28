@@ -3,7 +3,7 @@
 set -e
 
 #sudo apt-get -y update
-s#udo apt install -y gcc-4.8 gcc-4.8-multilib nasm upx upx-ucl p7zip-full autoconf automake make patch binutils-dev liblzma-dev syslinux isolinux genisoimage
+sudo apt install -y gcc-4.8 gcc-4.8-multilib nasm upx upx-ucl p7zip-full autoconf automake make patch binutils-dev liblzma-dev syslinux isolinux genisoimage
 
 #: << 'OLD_CODE'
 #1. 添加旧版源安装 GCC 4.8 (GCC 4.8 在 Ubuntu 22.04 官方源中已移除，需要从旧版本源安装)
